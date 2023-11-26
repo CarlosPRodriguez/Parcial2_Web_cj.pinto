@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { AlbumEntity } from 'src/album/album.entity';
 
 export class TrackDto {
   @IsString()
@@ -10,4 +11,7 @@ export class TrackDto {
   @IsNumber()
   @IsNotEmpty()
   readonly duracion: number;
+  @IsString()
+  @IsNotEmpty()
+  readonly album: AlbumEntity;
 }
