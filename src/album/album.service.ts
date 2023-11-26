@@ -24,7 +24,7 @@ export class AlbumService {
 
   async findAll(): Promise<AlbumEntity[]> {
     return await this.albumRepository.find({
-      relations: ['tracks', 'perfomers'],
+      relations: ['tracks', 'performers'],
     });
   }
 
@@ -36,10 +36,10 @@ export class AlbumService {
   }
 
   async create(albumDto: AlbumDto): Promise<AlbumEntity> {
-    if (new String(albumDto.nombre).length == 0) {
+    if (new String(albumDto.nombre) === '') {
       throw new BadRequestException(' El nombre esta vacio.');
     }
-    if (new String(albumDto.descripcion).length == 0) {
+    if (new String(albumDto.descripcion) === '') {
       throw new BadRequestException(' La descripcion esta vacio.');
     }
 

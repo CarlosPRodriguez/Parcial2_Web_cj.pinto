@@ -1,7 +1,17 @@
+import { IsDate, IsNotEmpty, IsString } from 'class-validator';
+
 export class AlbumDto {
-  readonly id: string;
+  @IsString()
   readonly nombre: string;
+
+  @IsString()
+  @IsNotEmpty()
   readonly caratula: string;
+
+  @IsDate()
+  @IsNotEmpty()
   readonly fechaLanzamiento: Date;
+
+  @IsString()
   readonly descripcion: string;
 }

@@ -103,42 +103,4 @@ export class AlbumPerformerService {
       );
     return album.performers;
   }
-
-  async associatePerformesAlbum(
-    albumId: string,
-    performers: PerformerEntity[],
-  ): Promise<AlbumEntity> {
-    const album: AlbumEntity = await this.albumRepository.findOne({
-      where: { id: albumId },
-      relations: ['performers'],
-    });
-
-    if (!album)
-      throw new BusinessLogicException(
-        'The album with the given id was not found',
-        BusinessError.NOT_FOUND,
-      );
-
-    for (let i = 0; i < performers.length; i++) {
-      const performer: PerformerEntity = await this.performerRepository.findOne(
-        {
-          where: { id: performers[i].id },
-        },
-      );
-      if (!performer)
-        throw new BusinessLogicException(
-          'The performer with the given id was not found',
-          BusinessError.NOT_FOUND,
-        );
-    }
-
-    if (album.performers.length > 3)
-      throw new BusinessLogicException(
-        'El album no puede tener mas de 3 performers asociados',
-        BusinessError.BAD_REQUEST,
-      );
-
-    album.performers = performers;
-    return await this.albumRepository.save(album);
-  }
 }

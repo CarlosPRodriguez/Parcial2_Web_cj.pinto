@@ -9,6 +9,7 @@ import { PerformerModule } from './performer/performer.module';
 import { AlbumEntity } from './album/album.entity';
 import { TrackEntity } from './track/track.entity';
 import { PerformerEntity } from './performer/performer.entity';
+import { AlbumPerformerModule } from './album-performer/album-performer.module';
 
 @Module({
   imports: [
@@ -18,9 +19,9 @@ import { PerformerEntity } from './performer/performer.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
-      port: 5432,
+      port: 5433,
       username: 'postgres',
-      password: 'postgres',
+      password: '201616667',
       database: 'postgres',
       entities: [
         AlbumEntity,
@@ -32,6 +33,7 @@ import { PerformerEntity } from './performer/performer.entity';
       synchronize: true,
       keepConnectionAlive: true,
     }),
+    AlbumPerformerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
