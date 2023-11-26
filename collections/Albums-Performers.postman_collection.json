@@ -145,6 +145,98 @@
 			"response": []
 		},
 		{
+			"name": "Add a performer 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"performer_3_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Performer 3 Carlos\",\r\n    \"imagen\": \"https://www.si.edu/sites/default/files/newsdesk/fact_sheets/nhb2015-02891.jpg\",\r\n    \"descripcion\": \"Esta sera una descripcion para hacer prueba postam para el parcial 2\"   \r\n }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/performers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"performers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a performer 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"performer_4_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Performer 4 Carlos\",\r\n    \"imagen\": \"https://www.si.edu/sites/default/files/newsdesk/fact_sheets/nhb2015-02891.jpg\",\r\n    \"descripcion\": \"Esta sera una descripcion para hacer prueba postam para el parcial 2\"   \r\n }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/performers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"performers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Add an performer to a album",
 			"event": [
 				{
@@ -185,6 +277,149 @@
 						"{{album_id}}",
 						"performers",
 						"{{performer_1_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add an performer 2 to a album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n    \"nombre\": \"Album Carlos\",\r\n    \"caratula\": \"Portada universitaria\",\r\n    \"fechaLanzamiento\": \"2023-11-25T12:00:00.000+00:00\",\r\n    \"descripcion\": \"The world's most popular natural history.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/{{album_id}}/performers/{{performer_2_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"{{album_id}}",
+						"performers",
+						"{{performer_2_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add an performer 3 to a album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n    \"nombre\": \"Album Carlos\",\r\n    \"caratula\": \"Portada universitaria\",\r\n    \"fechaLanzamiento\": \"2023-11-25T12:00:00.000+00:00\",\r\n    \"descripcion\": \"The world's most popular natural history.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/{{album_id}}/performers/{{performer_3_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"{{album_id}}",
+						"performers",
+						"{{performer_3_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "No add performer to a album por 3 performer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"    var data = pm.response.json();\r",
+							"    pm.expect(data.message).to.eql(\"El album no puede tener mas de 3 performers asociados\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n    \"nombre\": \"Album Carlos\",\r\n    \"caratula\": \"Portada universitaria\",\r\n    \"fechaLanzamiento\": \"2023-11-25T12:00:00.000+00:00\",\r\n    \"descripcion\": \"The world's most popular natural history.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/{{album_id}}/performers/{{performer_4_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"{{album_id}}",
+						"performers",
+						"{{performer_4_id}}"
 					]
 				}
 			},

@@ -20,20 +20,4 @@ export class AlbumPerformerController {
       performerId,
     );
   }
-
-//   @Get(':albumId/performers/:performerId')
-//   async findArtworkByMuseumIdArtworkId(
-//     @Param('museumId') museumId: string,
-//     @Param('artworkId') artworkId: string,
-//   ) {
-//     return await this.museumArtworkService.findArtworkByMuseumIdArtworkId(
-//       museumId,
-//       artworkId,
-//     );
-//   }
-
-//   @Get(':museumId/artworks')
-//   async findArtworksByMuseumId(@Param('museumId') museumId: string) {
-//     return await this.museumArtworkService.findArtworksByMuseumId(museumId);
-//   }
 }
