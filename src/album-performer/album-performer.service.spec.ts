@@ -1,11 +1,11 @@
 /* tslint:disable:no-unused-variable */
-
+/* archivo ../shared/testing-utils/typeorm-testing-config.ts*/
 import { Repository } from 'typeorm';
 import { AlbumPerformerService } from './album-performer.service';
 import { AlbumEntity } from '../album/album.entity';
 import { PerformerEntity } from '../performer/performer.entity';
 import { Test, TestingModule } from '@nestjs/testing';
-import { TypeOrmTestingConfig } from 'src/shared/testing-utils/typeorm-testing-config';
+import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { faker } from '@faker-js/faker';
 

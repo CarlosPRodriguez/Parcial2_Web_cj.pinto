@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-/* archivo src/shared/testing-utils/typeorm-testing-config.ts*/
+/* archivo ../shared/testing-utils/typeorm-testing-config.ts*/
 
 import { faker } from '@faker-js/faker';
 import { Repository } from 'typeorm';
@@ -97,6 +97,18 @@ describe('Service: Album', () => {
     };
     await expect(service.create(nuevo)).rejects.toThrow(BadRequestException);
   });  
+  it('Error con nombre vacia', async () => {
+    const nuevo = {
+      id: faker.string.uuid(),
+      nombre: '',
+      caratula: faker.image.url(),
+      fechaLanzamiento: faker.date.past(),
+      descripcion: faker.lorem.sentence(),
+      performers: [],
+      tracks: [],
+    };
+    await expect(service.create(nuevo)).rejects.toThrow(BadRequestException);
+  });  
 
   it('album should be created correctly', async () => {
     const crearAlbum = {
@@ -116,6 +128,24 @@ describe('Service: Album', () => {
   });
 
   //Prueba de metodo delete 
+  it('delete should remove a album', async () => {
+    const album: AlbumEntity = albumList[0];
+    await service.delete(album.id);
+    
+    const deletedAlbum: AlbumEntity = await repository.findOne({ where: { id: album.id } })
+    expect(deletedAlbum).toBeNull();
+  });
 
+  it('No delete a album with tracks', async () => {
+    const album: AlbumEntity = albumList[0];
+    if (album.tracks.length > 0)
+    await expect(service.delete(album.id)).rejects.toThrow(BadRequestException);
+  });
+
+  it('delete should throw an exception for an invalid album', async () => {
+    const album:AlbumEntity= albumList[0];
+    await service.delete(album.id);
+    await expect(() => service.delete("0")).rejects.toHaveProperty("message", "The album with the given id was not found")
+  });
 
 });

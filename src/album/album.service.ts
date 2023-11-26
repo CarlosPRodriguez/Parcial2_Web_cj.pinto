@@ -7,7 +7,7 @@ import { AlbumDto } from './album.dto';
 import {
   BusinessError,
   BusinessLogicException,
-} from 'src/shared/errors/bussines-errors';
+} from '../shared/errors/bussines-errors';
 
 @Injectable()
 export class AlbumService {

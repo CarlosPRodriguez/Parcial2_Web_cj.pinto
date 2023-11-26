@@ -10,7 +10,7 @@ import { TrackDto } from './track.dto';
 import {
   BusinessError,
   BusinessLogicException,
-} from 'src/shared/errors/bussines-errors';
+} from '../shared/errors/bussines-errors';
 
 @Injectable()
 export class TrackService {
