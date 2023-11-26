@@ -8,7 +8,4 @@ export class TrackDto {
   @IsNumber()
   @IsNotEmpty()
   readonly duracion: number;
-  // @IsString()
-  // @IsNotEmpty()
-  // readonly album: AlbumEntity;
 }

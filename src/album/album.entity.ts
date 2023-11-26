@@ -28,7 +28,7 @@ export class AlbumEntity {
 
   //OneToMany con TrackEntity
   @OneToMany((type) => TrackEntity, (track) => track.album)
-  //@JoinTable()
+  @JoinTable()
   tracks: TrackEntity[];
 
   //ManyToMany

@@ -3,8 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 import { AlbumEntity } from './album.entity';
-//import { TrackEntity } from '../track/track.entity';
-//import { PerformerEntity } from '../performer/performer.entity';
 import { AlbumDto } from './album.dto';
 import {
   BusinessError,
@@ -16,10 +14,6 @@ export class AlbumService {
   constructor(
     @InjectRepository(AlbumEntity)
     private albumRepository: Repository<AlbumEntity>,
-    //@InjectRepository(TrackEntity)
-    //private trackRepository: Repository<TrackEntity>, // Inyectar el repositorio de Track
-    //@InjectRepository(PerformerEntity)
-    //private perfomerRepository: Repository<PerformerEntity>, // Inyectar el repositorio de Performer
   ) {}
 
   async findAll(): Promise<AlbumEntity[]> {
@@ -43,10 +37,10 @@ export class AlbumService {
   }
 
   async create(albumDto: AlbumDto): Promise<AlbumEntity> {
-    if (new String(albumDto.nombre) === '') {
+    if (albumDto.nombre === '') {
       throw new BadRequestException(' El nombre esta vacio.');
     }
-    if (new String(albumDto.descripcion) === '') {
+    if (albumDto.descripcion === '') {
       throw new BadRequestException(' La descripcion esta vacio.');
     }
 

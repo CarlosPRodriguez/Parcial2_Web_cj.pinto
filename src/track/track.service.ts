@@ -46,7 +46,7 @@ export class TrackService {
         BusinessError.BAD_REQUEST,
       );
 
-    const album = await this.albumRepository.findOne({
+    const album: AlbumEntity = await this.albumRepository.findOne({
       where: { id: albumId },
       relations: ['tracks'],
     });
@@ -57,8 +57,10 @@ export class TrackService {
       );
 
     const track = new TrackEntity();
-    track.album.id = albumId;
+    track.album = album;
     Object.assign(track, trackDto);
+    //album.tracks = [...album.tracks, track];
+    //await this.albumRepository.save(album);
     return await this.trackRepository.save(track);
   }
 }
