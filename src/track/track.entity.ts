@@ -3,7 +3,7 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  JoinTable,
+  //JoinTable,
   ManyToOne,
 } from 'typeorm';
 
@@ -20,6 +20,5 @@ export class TrackEntity {
 
   //ManyToOne con Albumentity
   @ManyToOne((type) => AlbumEntity, (album) => album.tracks)
-  @JoinTable()
-  album: AlbumEntity[];
+  album: AlbumEntity;
 }

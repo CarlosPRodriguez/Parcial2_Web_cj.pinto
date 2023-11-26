@@ -1,4 +1,4 @@
-import { PerformerEntity } from 'src/performer/performer.entity';
+import { PerformerEntity } from '../performer/performer.entity';
 import { TrackEntity } from '../track/track.entity';
 import {
   Column,
@@ -28,7 +28,7 @@ export class AlbumEntity {
 
   //OneToMany con TrackEntity
   @OneToMany((type) => TrackEntity, (track) => track.album)
-  @JoinTable()
+  //@JoinTable()
   tracks: TrackEntity[];
 
   //ManyToMany

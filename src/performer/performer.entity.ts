@@ -1,4 +1,4 @@
-import { AerolineaEntity, AlbumEntity } from '../album/album.entity';
+import { AlbumEntity } from '../album/album.entity';
 import {
   Column,
   Entity,
