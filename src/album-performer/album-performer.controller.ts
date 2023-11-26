@@ -5,7 +5,7 @@ import { Controller, Param, Post, UseInterceptors } from '@nestjs/common';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/bussines-errors.interceptor';
 import { AlbumPerformerService } from './album-performer.service';
 
-@Controller('museums')
+@Controller('albums')
 @UseInterceptors(BusinessErrorsInterceptor)
 export class AlbumPerformerController {
   constructor(private readonly albumPerformerService: AlbumPerformerService) {}

@@ -34,7 +34,7 @@ export class AlbumPerformerService {
 
     const album: AlbumEntity = await this.albumRepository.findOne({
       where: { id: albumId },
-      relations: ['artworks', 'exhibitions'],
+      relations: ['performers', 'tracks'],
     });
     if (!album)
       throw new BusinessLogicException(
