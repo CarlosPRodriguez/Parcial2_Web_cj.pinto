@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
@@ -10,6 +6,10 @@ import { AlbumEntity } from './album.entity';
 //import { TrackEntity } from '../track/track.entity';
 //import { PerformerEntity } from '../performer/performer.entity';
 import { AlbumDto } from './album.dto';
+import {
+  BusinessError,
+  BusinessLogicException,
+} from 'src/shared/errors/bussines-errors';
 
 @Injectable()
 export class AlbumService {
@@ -29,10 +29,17 @@ export class AlbumService {
   }
 
   async findOne(id: string): Promise<AlbumEntity> {
-    return await this.albumRepository.findOne({
+    const album: AlbumEntity = await this.albumRepository.findOne({
       where: { id },
       relations: ['tracks', 'performers'],
     });
+    if (!album)
+      throw new BusinessLogicException(
+        'The album with the given id was not found',
+        BusinessError.NOT_FOUND,
+      );
+
+    return album;
   }
 
   async create(albumDto: AlbumDto): Promise<AlbumEntity> {
@@ -54,42 +61,22 @@ export class AlbumService {
       where: { id },
       relations: ['tracks'],
     });
-    if (prueba.tracks.length > 0) {
-      throw new BadRequestException(
-        'No se debe eliminar el album si tiene asociados',
+    // Si llega el caso que no encuentra el album con el id proporcionado
+
+    if (!prueba) {
+      throw new BusinessLogicException(
+        'No existe album con el id proporcionado',
+        BusinessError.NOT_FOUND,
       );
     }
-    // Si llega el caso que no encuentra el album con el id proporcionado
-    if (!prueba) {
-      throw new NotFoundException('No existe album con el id proporcionado');
+
+    if (prueba.tracks.length > 0) {
+      throw new BusinessLogicException(
+        'No se debe eliminar el album si tiene asociados',
+        BusinessError.BAD_REQUEST,
+      );
     }
 
-    await this.albumRepository.delete(id);
+    await this.albumRepository.remove(prueba);
   }
-
-  //Asociacion
-
-  // async addAlbumToPerfomer(
-  //   albumId: string,
-  //   perfomerId: string,
-  // ): Promise<AlbumEntity> {
-  //   const album = await this.albumRepository.findOne({
-  //     where: { id: albumId },
-  //     relations: ['performers'],
-  //   });
-  //   if (!album) throw new NotFoundException('Album no encontrada.');
-
-  //   const perfomer = await this.perfomerRepository.findOne({
-  //     where: { id: perfomerId },
-  //   });
-  //   if (!perfomer) throw new NotFoundException('Performer no encontrado.');
-  //   // Performer no debe tener mas de 3 segun en el enunciado del parcial
-  //   if (album.performers.length >= 3) {
-  //     throw new BadRequestException(
-  //       'El album tiene mas de tres performers asociados.',
-  //     );
-  //   }
-  //   album.performers.push(perfomer);
-  //   return this.albumRepository.save(album);
-  // }
 }
